@@ -113,7 +113,7 @@ def cutter_number(
         logger.debug("\n")
 
     if cutter_s is None:
-        raise RuntimeError("Unable to retrieve Cutter-Sanborn number.")
+        raise ValueError("Unable to retrieve Cutter-Sanborn number.")
 
     return 0
 
