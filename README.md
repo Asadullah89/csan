@@ -32,9 +32,32 @@ options:
   -v, --verbose
 ```
 
-## Examples  
+For instance:
 
 - `csan -f John -l Doe` -> D649
 - `csan -f John -l Doe -t "My Book"` -> D649m
 - `csan -f First -l Last -v` -> L349, with log output to the console
 - `csan -f Jorge -l "De la Cruz"` -> D332
+
+## Examples
+
+The following cutter numbers are expected, for their respective names. This is achieved with `cutter_number` function from `csan.cutter`. When run via CLI, the output is the cutter identifier (`cutter_identifier` function), which also includes the cutter number.
+
+| First Name | Last Name    | Cutter Number |
+|------------|--------------|:------------------------:|
+| Charles    | Dickens      | 548                    |
+| Jane       | Austen       | 933                    |
+| Mark       | Twain        | 969                    |
+| Samuel     | Clemens      | 625                    |
+| George     | Orwell       | 79                     |
+| Eric       | Blair        | 635                    |
+| Virginia   | Woolf        | 913                    |
+| Leo        | Tolstoy      | 654                    |
+| Fyodor     | Dostoyevsky  | 724                    |
+| Herman     | Melville     | 531                    |
+| Emily      | Dickinson    | 553                    |
+| William    | Shakespeare  | 527                    |
+| Agatha     | Christie     | 555                    |
+| Stephen    | King         | 52                     |
+| Jorge      | De la Cruz   | 332                    |
+| Lord       | Sith         | 622                    |
