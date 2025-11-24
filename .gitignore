@@ -1,20 +1,26 @@
+# cache
 __pycache__/
-*.py[cod]
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 
+# envs
 .venv/
 venv/
 .env/
 .env.*
 ENV/
-*.log
 
+# build artifacts
 build/
 dist/
 wheels/
 *.egg-info/
+*.py[cod]
 
+# misc
+*.log
+
+# editors configs
 .vscode/
 .idea/
