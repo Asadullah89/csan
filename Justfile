@@ -1,12 +1,14 @@
 alias test := pytest
 alias tests := pytest
+alias checks := check
 
-
+[doc("List Just recipes")]
 default:
   @just --list
 
 
-[group("Check")]
+[group("Checks")]
+[doc("Run static typing checks")]
 static:
   @echo
   uv run basedpyright
@@ -18,35 +20,37 @@ static:
   uv run ty check
   
 
-[group("Check")]
+[group("Checks")]
 [group("Ruff")]
 format-check:
   @echo
   uv run ruff format --check
 
 
-[group("Check")]
+[group("Checks")]
 [group("Ruff")]
 linter:
   @echo
   uv run ruff check
 
 
-[group("Check")]
+[group("Checks")]
 [group("Ruff")]
+[doc("Run Ruff checks: formatter and linter")]
 ruff: format-check linter
 
 
-[group("Check")]
+[group("Checks")]
 [group("Tests")]
 pytest:
   @echo
   uv run pytest --doctest-modules
 
 
-[group("Check")]
+[group("Checks")]
 [group("Tests")]
 [group("Ruff")]
+[doc("Run all checks: static typing, Ruff linter/formatter and tests")]
 check: static ruff pytest
 
 
@@ -66,7 +70,7 @@ release tag semver:
   git tag "$tag"
   git push origin main --tags
 
-
+[doc("Clean temporary files")]
 clean:
     @echo "Cleaning temporary files, except in .venv and .env"
     find . -type d \
