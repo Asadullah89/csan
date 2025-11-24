@@ -54,9 +54,11 @@ check: static ruff pytest
 format:
   uv run ruff format
 
-
-release tag:
+[doc("semver: major|minor|patch")]
+release tag semver:
   #!/usr/bin/sh
+  uv version --bump {{ semver }}
+  uv sync
   git cliff --unreleased --tag {{ tag }} --output CHANGELOG.md
   git add .
   git commit -m "chore(release): update CHANGELOG.md for $tag"
