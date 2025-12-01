@@ -23,6 +23,16 @@ from csan.cutter import cutter_number
         ("Jorge", "De la Cruz", 332),
         ("Ivan", "Smith", 649),
         ("Lord", "Sith", 622),
+        ("Emile", "Zola", 86),
+        (None, "Aarabc", 113),
+        (None, "Aa", 111),
+        (None, "Aabbcc", 111),
+        (None, "Ba", 111),
+        (None, "Baab", 111),
+        (None, "Za", 11),
+        (None, "Zaaz", 11),
+        (None, "Zy", 99),
+        (None, "Zyz", 99),
     ],
 )
 def test_cutter_number_basic(first_name: str, last_name: str, expected: int) -> None:
