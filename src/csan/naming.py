@@ -88,6 +88,6 @@ def process_name(first_name: str, last_name: str) -> tuple[str, str]:
     )
 
     if len(last_name) < 2:
-        raise ValueError(f"Last Name must have at least 2 letters. Got {last_name}")
+        raise ValueError("Last Name must have at least 2 letters")
 
     return first_name, last_name
