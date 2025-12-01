@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def cutter_number(
-    first_name: str,
+    first_name: str | None,
     last_name: str,
     composed_name: str | None = None,
     composed_name_abbr: str | None = None,
@@ -41,10 +41,17 @@ def cutter_number(
 
     obvious_attempts = [
         composed_name,
-        last_name + f", {first_name[:3]}.",
-        composed_name_abbr,
         last_name,
     ]
+
+    if first_name is not None:
+        obvious_attempts.insert(1, last_name + f", {first_name[:3]}.")
+
+    if composed_name != composed_name_abbr:
+        obvious_attempts.insert(
+            -1,
+            composed_name_abbr,
+        )
 
     if attempt := next((a for a in obvious_attempts if a in CUTTER_DATA), None):
         logger.debug(

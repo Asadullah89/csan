@@ -14,7 +14,7 @@ def get_args() -> argparse.Namespace:
         description="Cutter-Sanborn identifier generator.",
     )
 
-    parser.add_argument("-f", "--first-name", required=True)
+    parser.add_argument("-f", "--first-name")
     parser.add_argument("-l", "--last-name", required=True)
     parser.add_argument("-t", "--title")
     parser.add_argument(
@@ -45,7 +45,9 @@ def main():
     if args.verbose:
         verbalize_args(
             **{
-                "Name": args.first_name + " " + args.last_name,
+                "Name": args.first_name + " " + args.last_name
+                if first_name is not None
+                else args.last_name,
                 "First name": first_name,
                 "Last name": last_name,
                 "Composed name": composed_name,

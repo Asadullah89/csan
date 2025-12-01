@@ -38,12 +38,12 @@ def ascii_name(name: str) -> str:
     return name
 
 
-def compose_name(first_name: str, last_name: str) -> tuple[str, str]:
+def compose_name(first_name: str | None, last_name: str) -> tuple[str, str]:
     """
     Compose a name, given a first and a last name.
 
     Args:
-        first_name (str): a person's first name;
+        first_name (str|None): a person's first name;
         last_name (str): a person's last name.
 
     Returns:
@@ -53,18 +53,24 @@ def compose_name(first_name: str, last_name: str) -> tuple[str, str]:
     Examples:
         >>> compose_name("First", "Last")
         ('Last, First', 'Last, F.')
+        >>> compose_name(None, "Last")
+        ('Last', 'Last')
     """
-    composed_name = f"{last_name}, {first_name}"
-    composed_name_abbr = f"{last_name}, {first_name[0]}."
+    if first_name is not None:
+        composed_name = f"{last_name}, {first_name}"
+        composed_name_abbr = f"{last_name}, {first_name[0]}."
+    else:
+        composed_name, composed_name_abbr = last_name, last_name
+
     return (composed_name, composed_name_abbr)
 
 
-def process_name(first_name: str, last_name: str) -> tuple[str, str]:
+def process_name(first_name: str | None, last_name: str) -> tuple[str | None, str]:
     """
     Process a name, returning normalized strings for usage in `cutter_number` function.
 
     Args:
-        first_name (str): first name;
+        first_name (str|None): first name;
         last_name (str): last name.
 
     Returns:
@@ -82,10 +88,10 @@ def process_name(first_name: str, last_name: str) -> tuple[str, str]:
         >>> process_name("first", "last")
         ('First', 'Last')
     """
-    first_name, last_name = (
-        ascii_name(re.split(r"[;,.\-' ]+", first_name)[0]).title(),
-        ascii_name(re.sub(r"[;,.\-' ]+", "", last_name)).title(),
-    )
+    if first_name is not None:
+        first_name = ascii_name(re.split(r"[;,.\-' ]+", first_name)[0]).title()
+
+    last_name = ascii_name(re.sub(r"[;,.\-' ]+", "", last_name)).title()
 
     if len(last_name) < 2:
         raise ValueError("Last Name must have at least 2 letters")
