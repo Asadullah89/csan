@@ -7,8 +7,10 @@ __pycache__/
 # envs
 .venv/
 venv/
+env/
 .env/
 .env.*
+.env
 ENV/
 
 # build artifacts
