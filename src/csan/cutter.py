@@ -11,8 +11,6 @@ def cutter_number(
     last_name: str,
     composed_name: str | None = None,
     composed_name_abbr: str | None = None,
-    *,
-    verbose: bool = False,
 ) -> int:
     """
     Generate/Retrieve a cutter-sanborn number, given a first and last name.
@@ -22,7 +20,6 @@ def cutter_number(
         last_name (str): a person's last name (e.g. "Doe");
         composed_name (str|None): a composition in the format "Last, First";
         composed_name_abbr (str|None): an abbreviated compositon, format "Last, F."
-        verbose (bool): show debug logs.
 
     Returns:
         An integer, retrieved from the Cutter-Sanborn table.
@@ -34,9 +31,6 @@ def cutter_number(
         >>> cutter_number("First", "Last")
         349
     """
-    log_level = logging.DEBUG if verbose else logging.INFO
-    logging.basicConfig(level=log_level, format="%(message)s")
-
     first_name, last_name = process_name(first_name, last_name)
 
     if (composed_name is None) or (composed_name_abbr is None):

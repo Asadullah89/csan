@@ -29,7 +29,6 @@ def _get_args() -> argparse.Namespace:
 def _verbalize_args(**kwargs: str | bool | None) -> None:
     name: str = cast(str, kwargs["Name"]).replace(" ", "")
     if not name.isascii() or not name.isalpha():
-        logging.basicConfig(level=logging.INFO)
         logger.warning("works better with ascii and alphabetic name.")
 
     for k, v in kwargs.items():
@@ -40,6 +39,8 @@ def main():
     args = _get_args()
     first_name, last_name = process_name(args.first_name, args.last_name)
     composed_name, composed_name_abbr = compose_name(first_name, last_name)
+    log_level = logging.DEBUG if args.verbose else logging.INFO
+    logging.basicConfig(level=log_level, format="%(message)s")
 
     if args.verbose:
         _verbalize_args(
@@ -61,7 +62,6 @@ def main():
             last_name,
             composed_name,
             composed_name_abbr,
-            verbose=args.verbose,
         ),
         args.title,
     )
