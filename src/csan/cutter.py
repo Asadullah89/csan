@@ -1,4 +1,5 @@
 import logging
+from bisect import bisect_left
 
 from .data import CUTTER_DATA
 from .naming import compose_name, process_name
@@ -53,7 +54,20 @@ def cutter_number(
         )
         return CUTTER_DATA[attempt]
 
-    sieved_data = [k for k in CUTTER_DATA if k.startswith(last_name[0:2])]
+    ls_data = list(CUTTER_DATA)
+    bisect_entrypoint = bisect_left(ls_data, last_name[0:2])
+    bisect_endpoint = bisect_left(
+        ls_data,
+        last_name[0] + chr(ord(last_name[1]) + 1),
+        lo=bisect_entrypoint,
+    )
+
+    sieved_data = ls_data[bisect_entrypoint:bisect_endpoint]
+
+    # alternative to bisect (a bit slower)
+    # sieved_data = [
+    #    k for k in ls_data[bisect_entrypoint - 1 :] if k.startswith(last_name[0:2])
+    # ]
 
     composed_name_decrescent = [
         composed_name[: i + 1]
