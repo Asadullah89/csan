@@ -9,18 +9,6 @@ default:
 dev-deps:
   uv add --dev mypy basedpyright ty pyrefly ruff pytest
 
-[group("Checks")]
-[doc("Run static typing checks")]
-static:
-  @echo
-  uv run basedpyright
-  @echo
-  uv run mypy .
-  @echo
-  uv run pyrefly check
-  @echo
-  uv run ty check
-  
 
 [group("Checks")]
 [group("Ruff")]
@@ -39,7 +27,9 @@ linter:
 [group("Checks")]
 [group("Ruff")]
 [doc("Run Ruff checks: formatter and linter")]
-ruff: format-check linter
+ruff:
+  uv run ruff format
+  @just format-check linter
 
 
 [group("Checks")]
@@ -50,13 +40,25 @@ pytest:
 
 
 [group("Checks")]
+[doc("Run static typing checks")]
+static:
+  @echo
+  uv run basedpyright
+  @echo
+  uv run mypy .
+  @echo
+  uv run pyrefly check
+  @echo
+  uv run ty check
+  
+
+[group("Checks")]
 [group("Tests")]
 [group("Ruff")]
 [doc("Run all checks: static typing, Ruff linter/formatter and tests")]
 check: 
   uv sync
-  uv run ruff format
-  @just static ruff pytest
+  @just ruff pytest static 
 
 
 [group("Ruff")]
