@@ -1,6 +1,6 @@
 [project]
 name = "csan"
-version = "0.1.1"
+version = "0.2.0"
 description = "CLI tool that generates a Cutter-Sanborn identifier, given a first and a last name."
 readme = "README.md"
 authors = [{ name = "VERA LVX", email = "veralvx@veralvx.com" }]
@@ -80,6 +80,7 @@ ignore = [
     "ANN401",
     "COM812",
     "CPY001",
+    "C901",
     "D100",
     "D101",
     "D102",
