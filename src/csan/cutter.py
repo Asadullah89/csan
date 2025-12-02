@@ -61,19 +61,19 @@ def cutter_number(
         )
         return CUTTER_DATA[attempt]
 
-    ls_data = list(CUTTER_DATA)
-    bisect_entrypoint = bisect_left(ls_data, last_name[0:2])
+    tuple_data = tuple(CUTTER_DATA)
+    bisect_entrypoint = bisect_left(tuple_data, last_name[0:2])
     bisect_endpoint = bisect_left(
-        ls_data,
+        tuple_data,
         last_name[0] + chr(ord(last_name[1]) + 1),
         lo=bisect_entrypoint,
     )
 
-    sieved_data = ls_data[bisect_entrypoint:bisect_endpoint]
+    sieved_data = tuple_data[bisect_entrypoint:bisect_endpoint]
 
     # alternative to bisect (a bit slower)
     # sieved_data = [
-    #    k for k in ls_data[bisect_entrypoint - 1 :] if k.startswith(last_name[0:2])
+    #    k for k in tuple_data[bisect_entrypoint - 1 :] if k.startswith(last_name[0:2])
     # ]
 
     composed_name_decrescent = [
