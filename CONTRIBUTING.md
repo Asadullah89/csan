@@ -58,7 +58,7 @@ just test
 
 ### Static Typing Checks
 
-```
+```console
 just static
 ```
 
