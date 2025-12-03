@@ -34,8 +34,6 @@ options:
 
 For instance:
 
-
-
 ### Examples
 
 - `csan -f John -l Doe` -> D649
@@ -43,7 +41,7 @@ For instance:
 - `csan -f First -l Last -v` -> L349, with log output to the console
 - `csan -f Jorge -l "De la Cruz"` -> D332
 
-The following table shows expected Cutter call numbers for their respective names, using CLI
+The following table shows expected Cutter call numbers for their respective names, using CLI:
 
 | First Name | Last Name    | Cutter Call Number |
 |------------|--------------|:------------------:|
@@ -73,8 +71,8 @@ The following table shows expected Cutter call numbers for their respective name
 
 There are two relevant functions in `csan` package:
 
-- `csan.cutter.cutter_number`: return the integer part of the cutter call number
-- `csan.cutter.cutter_call_number`: return the call number
+- `csan.cutter.cutter_number`: return the integer part of the Cutter call number
+- `csan.cutter.cutter_call_number`: return the Cutter call number
 
 Also, the entire Cutter-Sanborn table can be retrieved as a Python `dict`:
 
