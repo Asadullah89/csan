@@ -1,3 +1,36 @@
+## [0.3.0] - 2025-12-03
+
+### 🚀 Features
+
+- Allow single character last name
+- Allow single character last name
+
+### 🐛 Bug Fixes
+
+- Handle first two letters absent from the table
+- Remove debugging entry
+- [**breaking**] Broad rewrite and handle edge cases
+
+### 🚜 Refactor
+
+- Create a tuple from cutter keys instead of a list
+
+### 📚 Documentation
+
+- Update README
+
+### 🧪 Testing
+
+- Add edge cases
+
+### ⚙️ Miscellaneous Tasks
+
+- *(refactor)* Reorder justfile recipes
+- Add contribution instructions
+- Add aliases for  justfile recipes
+- Ignore 'Too many statements' ruff rule
+- Exclude log files in .gitignore
+- *(release)* Bump version
 ## [0.2.0] - 2025-12-02
 
 ### 🚀 Features
@@ -39,6 +72,7 @@
 - Add autoformat in check recipe
 - *(release)* Bump version
 - *(release)* Update CHANGELOG
+- Update CHANGELOG
 ## [0.1.1] - 2025-11-24
 
 ### 🐛 Bug Fixes
