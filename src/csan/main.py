@@ -2,7 +2,7 @@ import argparse
 import logging
 from typing import cast
 
-from .cutter import cutter_identifier, cutter_number
+from .cutter import cutter_call_number, cutter_number
 from .naming import compose_name, process_name
 
 logger = logging.getLogger(__name__)
@@ -57,17 +57,23 @@ def main():
             }
         )
 
-    cutter_id = cutter_identifier(
+    cutter_n = cutter_number(
+        first_name,
         last_name,
-        cutter_number(
-            first_name,
-            last_name,
-            composed_name,
-            composed_name_abbr,
-        ),
-        args.title,
+        composed_name,
+        composed_name_abbr,
     )
-    print(cutter_id)
+
+    if cutter_n:
+        print(
+            cutter_call_number(
+                last_name,
+                cutter_n,
+                args.title,
+            )
+        )
+    else:
+        raise ValueError("cutter_number returned None")
 
 
 if __name__ == "__main__":

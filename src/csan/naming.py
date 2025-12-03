@@ -25,7 +25,7 @@ def ascii_name(name: str) -> str:
         >>> ascii_name("hôpital")
         'hopital'
     """
-    if not name.isalpha():
+    if not name.replace(".", "").isalpha():
         raise ValueError(f"Invalid string: {name}")
 
     if not name.isascii():
@@ -58,7 +58,11 @@ def compose_name(first_name: str | None, last_name: str) -> tuple[str, str]:
     """
     if first_name is not None:
         composed_name = f"{last_name}, {first_name}"
-        composed_name_abbr = f"{last_name}, {first_name[0]}."
+        composed_name_abbr = (
+            f"{last_name}, {first_name[0]}."
+            if len(first_name) > 1
+            else f"{last_name}, {first_name[0]}"
+        )
     else:
         composed_name, composed_name_abbr = last_name, last_name
 
@@ -87,9 +91,11 @@ def process_name(first_name: str | None, last_name: str) -> tuple[str | None, st
     Examples:
         >>> process_name("first", "last")
         ('First', 'Last')
+        >>> process_name(None, "last")
+        (None, 'Last')
     """
     if first_name is not None:
-        first_name = ascii_name(re.split(r"[;,.\-' ]+", first_name)[0]).title()
+        first_name = ascii_name(re.split(r"[;,\-' ]+", first_name)[0]).title()
 
     last_name = ascii_name(re.sub(r"[;,.\-' ]+", "", last_name)).title()
 

@@ -12,7 +12,7 @@ def cutter_number(
     last_name: str,
     composed_name: str | None = None,
     composed_name_abbr: str | None = None,
-) -> int:
+) -> int | None:
     """
     Generate/Retrieve a cutter-sanborn number, given a first and last name.
 
@@ -34,36 +34,61 @@ def cutter_number(
     """
     first_name, last_name = process_name(first_name, last_name)
 
+    # Last names with one letter must be the start of a series for a letter entry.
+    # All entries, for each new starting letter, start with [A-z]a pattern.
+    # Thus, the right side of bisection will have all entries where entry > last_name.
+    # The first element of this list will have last_name's cutter number when retrieved.
     if len(last_name) == 1:
         logger.debug("last_name has len == 1. Retrieving first entry with this letter.")
         cutter_bisect = bisect_right(tuple_cutter := tuple(CUTTER_DATA), last_name)
         return CUTTER_DATA[tuple_cutter[cutter_bisect]]
 
+    # There are only 5 entries in CUTTER_DATA with 2 or more letters in the first name.
+    # All of them are associated to Smiths.
+    # Matching these edge cases, composed_name_decrescent can be built from
+    # composed_name_abbr instead of composed_name
+    if last_name == "Smith" and first_name:
+        match first_name:
+            case f if f.startswith("John"):
+                return CUTTER_DATA["Smith, John"]
+            case f if f.startswith("Jos"):
+                return CUTTER_DATA["Smith, Jos."]
+            case f if f.startswith("Robert"):
+                return CUTTER_DATA["Smith, Robert"]
+            case f if f.startswith("Sol"):
+                return CUTTER_DATA["Smith, Sol"]
+            case f if f == "William" or f.startswith("Wm"):
+                return CUTTER_DATA["Smith, Wm."]
+
     if (composed_name is None) or (composed_name_abbr is None):
         composed_name, composed_name_abbr = compose_name(first_name, last_name)
 
-    cutter_s = None
+    composed_name_catdot = (
+        composed_name + "."
+        if "." not in composed_name
+        else composed_name.replace(".", "")
+    )
 
-    obvious_attempts = [
-        composed_name,
-        last_name,
-    ]
+    obvious_attempts = [composed_name]
 
-    if first_name is not None:
-        obvious_attempts.insert(1, last_name + f", {first_name[:3]}.")
+    # if first_name, then composed_name != last_name
+    if first_name:
+        obvious_attempts.append(composed_name_catdot)
+        obvious_attempts.append(last_name)
 
+    # There are two cases where composed_name == composed_name_abbr
+    # 1: first_name is None, in which case both vars are equal to last_name
+    # 2: len(first_name) == 1,
+    # in which case both vars are equal to f"{last_name}, {first_name}" (no final dot)
     if composed_name != composed_name_abbr:
-        obvious_attempts.insert(
-            -1,
-            composed_name_abbr,
-        )
+        insert_obv = [composed_name_abbr, composed_name_abbr.replace(".", "")]
+        for i in insert_obv:
+            obvious_attempts.insert(-1, i)
+
+    logger.debug("Obvious attempts: %s", obvious_attempts)
 
     if attempt := next((a for a in obvious_attempts if a in CUTTER_DATA), None):
-        logger.debug(
-            "Obvious attempts: %s\nReturning match '%s' from obvious attempts",
-            obvious_attempts,
-            attempt,
-        )
+        logger.debug("Returning match '%s' from obvious attempts", attempt)
         return CUTTER_DATA[attempt]
 
     tuple_data = tuple(CUTTER_DATA)
@@ -78,22 +103,28 @@ def cutter_number(
 
     # alternative to bisect (a bit slower)
     # sieved_data = [
-    #    k for k in tuple_data[bisect_entrypoint - 1 :] if k.startswith(last_name[0:2])
+    #    k for k in CUTTER_DATA if k.startswith(last_name[0:2])
     # ]
 
+    # Build composed_name_decrescent from composed_name_abbr instead of
+    # composed_name, since 2+ letters in first name cases are covered in Smiths match.
     composed_name_decrescent = [
-        composed_name[: i + 1]
-        for i in range(len(composed_name), 0, -1)
-        if not composed_name[: i + 1].endswith((",", " "))
+        composed_slice
+        for i in range(len(composed_name), 1, -1)
+        if not (composed_slice := composed_name[:i]).endswith((",", " "))
     ]
+
+    if first_name and len(first_name) == 1:
+        composed_name_decrescent.insert(1, composed_name_catdot)
 
     logger.debug("\nDecrescent last name list: %s", composed_name_decrescent)
 
-    for pos, name in enumerate(composed_name_decrescent[1:]):
+    cutter_s = None
+    max_len = len(max(composed_name, composed_name_catdot))
+
+    for pos, name in enumerate(composed_name_decrescent):
         sub_sieved = [
-            k
-            for k in sieved_data
-            if (k.startswith(name) and (len(k) <= len(composed_name)))
+            k for k in sieved_data if (k.startswith(name) and (len(k) <= max_len))
         ]
 
         if not sub_sieved:
@@ -117,13 +148,10 @@ def cutter_number(
                     logger.debug("Pairs are empty. Continuing...")
                     continue
 
-                logger.debug("Pairs: %s\nMatch: %s.", pairs, cutter_s)
+                logger.debug("Pairs: %s\nMatch: %s", pairs, cutter_s)
 
-                cutter_s = (
-                    candidate
-                    if all(x >= y and (x.isalpha() == y.isalpha()) for x, y in pairs)
-                    else cutter_s
-                )
+                if all(x >= y and (x.isalpha() == y.isalpha()) for x, y in pairs):
+                    cutter_s = candidate
 
             logger.debug("Match: %s\n", cutter_s)
 
@@ -133,22 +161,18 @@ def cutter_number(
         logger.debug("\n")
 
     if cutter_s is None:
-        logger.debug(
-            "Last resource: bisect on last name, first letter; get adjacent left entry"
-        )
+        logger.debug("Last resource: bisect_right using first two letters of last name")
         cutter_bisect = bisect_right(tuple_data, composed_name_decrescent[-1])
-        return CUTTER_DATA[tuple_data[cutter_bisect - 1]]
-        # raise ValueError("Unable to retrieve Cutter-Sanborn number.")
+        return CUTTER_DATA[tuple_data[max(0, cutter_bisect - 1)]]
 
-    return 0
+    return None
 
 
-# first_letters = last_name[0] if last_name[1] in "aeiou" else last_name[0:2].upper()
-def cutter_identifier(
+def cutter_call_number(
     last_name: str, cutter_number: int, title: str | None = None
 ) -> str:
     """
-    Generate an identifier based on last name, cutter-sanborn number and a title.
+    Generate call-number based on last name, cutter-sanborn numbertitle.
 
     Args:
         last_name (str): a person's last name;
@@ -156,10 +180,10 @@ def cutter_identifier(
         title (str): a work's title.
 
     Returns:
-        A string identifier
+        A call number identifier
 
     Examples:
-        >>> cutter_identifier("Doe", 649, "Title")
+        >>> cutter_call_number("Doe", 649, "Title")
         'D649t'
     """
     title = "" if title is None else title[0].lower()
