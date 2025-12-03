@@ -74,7 +74,7 @@ checks:
   @just ruff-checks pytest static 
 
 
-[doc("Template steps for a relase. Not meant to be run. Usage: just release <major|minor|patch>")]
+[doc("Template steps for a relase. Not meant to be run. Hypothetical usage: just release <major|minor|patch>")]
 [group("Misc")]
 release semver:
   #!/usr/bin/sh
