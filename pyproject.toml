@@ -100,6 +100,9 @@ ignore = [
     "INP001",
     "PLR2004",
     "PLR0904", # Too many public methods (>20)
+    "PLR0912", # Too many branches (>12)
+    "PLR0911", # To many return statements (>6)
+    "PLR0915", # To many statements (>50)
     "PLR1702", # too-many-nested-blocks (PLR1702)
     "PT011",
     "PTH123",  # use pathlib instead of open
