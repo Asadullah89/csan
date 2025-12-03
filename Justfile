@@ -63,18 +63,18 @@ static:
   uv run pyrefly check
   @echo
   uv run ty check
-  
+
 
 [group("Checks")]
 [group("Tests")]
 [group("Ruff")]
 [doc("Run all checks: Ruff linter/formatter, static typing, tests")]
-checks: 
+checks:
   uv lock --check
-  @just ruff-checks pytest static 
+  @just ruff-checks pytest static
 
 
-[doc("Template steps for a relase. Not meant to be run. Hypothetical usage: just release <major|minor|patch>")]
+[doc("Template steps for a relase. Usage: just release <major|minor|patch>")]
 [group("Misc")]
 release semver:
   #!/usr/bin/sh
