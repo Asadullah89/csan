@@ -6,7 +6,7 @@ The Cutter-Sanborn identifier, commonly called "Cutter number", is an alphanumer
 
 ## Installation
 
-You can install this tool using `pip` or `uv`:
+You can install this tool using [`uv`](https://docs.astral.sh/uv/) or `pip`:
 
 ```console
 uv tool install csan
@@ -61,5 +61,7 @@ The following cutter numbers are expected, for their respective names. This is a
 | Stephen    | King         | 52            |
 | Jorge      | De la Cruz   | 332           |
 | Ivan       | Smith        | 649           |
-| Lord       | Sith         | 622           |
+| William    | Smith        | 664           |
 | Emile      | Zola         | 86            |
+| VERA       | LVX          | 979           |
+| Lord       | Sith         | 622           |
