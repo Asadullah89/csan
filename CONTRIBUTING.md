@@ -28,7 +28,7 @@ git switch -c <short-desc>
 ```
 
 
-## Commands
+## Just Commands
 
 | Command | Description |
 | :--- | :--- |
@@ -47,9 +47,4 @@ git switch -c <short-desc>
 ## Commit messages
 
 Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/#specification).
-
-
-## Legal
-
-By contributing, you agree that your contributions will be licensed under the repository license.
 
