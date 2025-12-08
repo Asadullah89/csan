@@ -25,6 +25,8 @@ wheels/
 *.log
 log.*
 .log.*
+draft*/
+.draft*
 
 # editors configs
 .vscode/
